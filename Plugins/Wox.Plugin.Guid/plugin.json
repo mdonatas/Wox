@@ -1,0 +1,12 @@
+{
+  "ID": "E4E5E819CD78F09AABE8C3020080DCB8",
+  "ActionKeyword": "*",
+  "Name": "Guid",
+  "Description": "Add Guid to Clipboard",
+  "Author": "mdonatas",
+  "Version": "1.0.0",
+  "Language": "csharp",
+  "Website": "",
+  "ExecuteFileName": "Wox.Plugin.Guid.dll",
+  "IcoPath": "Images\\color.png"
+}
