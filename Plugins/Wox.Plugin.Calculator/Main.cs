@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Windows;
@@ -15,7 +16,7 @@ namespace Wox.Plugin.Caculator
                         @"eigval|eigvec|eig|sum|polar|plot|round|sort|real|zeta|" +
                         @"bin2dec|hex2dec|oct2dec|" +
                         @"==|~=|&&|\|\||" +
-                        @"[ei]|[0-9]|[\+\-\*\/\^\., ""]|[\(\)\|\!\[\]]" +
+                        @"[ei]|[0-9]|[\+\-\*\/\^\., ""]|--|[\(\)\|\!\[\]]" +
                         @")+$", RegexOptions.Compiled);
         private static readonly Regex RegBrackets = new Regex(@"[\(\)\[\]]", RegexOptions.Compiled);
         private static readonly Engine MagesEngine;
@@ -34,7 +35,14 @@ namespace Wox.Plugin.Caculator
 
             try
             {
-                var result = MagesEngine.Interpret(query.Search);
+                string search = query.Search;
+
+                if (search.Contains("--"))
+                {
+                    search = search.Replace("--", "- -");
+                }
+
+                var result = MagesEngine.Interpret(search);
 
                 if (result.ToString() == "NaN")
                     result = Context.API.GetTranslation("wox_plugin_calculator_not_a_number");
